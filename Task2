@@ -1,0 +1,41 @@
+#include "Stack.h"
+
+int main() {
+    Stack<int> stack;  // Create a stack of integers
+    int choice, data;
+
+    while (true) {
+        cout << "Menu:\n";
+        cout << "1. Push data onto the stack\n";
+        cout << "2. Pop data from the stack\n";
+        cout << "3. Get top element of the stack\n";
+        cout << "4. Display stack\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter data to push onto the stack: ";
+                cin >> data;
+                stack.push(data);
+                break;
+            case 2:
+                stack.pop();
+                break;
+            case 3:
+                cout << "Top element is: " << stack.top() << endl;
+                break;
+            case 4:
+                cout << "Stack: ";
+                stack.display();
+                break;
+            case 5:
+                cout << "Exiting...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+    return 0;
+}
