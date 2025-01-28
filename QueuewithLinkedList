@@ -1,0 +1,62 @@
+#include "Linkedlist.h"
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Queue {
+private:
+    Node<T>* frontNode;
+    Node<T>* rearNode;
+
+public:
+    Queue() : frontNode(nullptr), rearNode(nullptr) {}
+
+    bool isEmpty() {
+        return frontNode == nullptr;
+    }
+
+    void enqueue(T data) {
+        Node<T>* newNode = new Node<T>(data);
+        if (isEmpty()) {
+            frontNode = rearNode = newNode;
+        } else {
+            rearNode->next = newNode;
+            rearNode = newNode;
+        }
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return;
+        }
+        Node<T>* temp = frontNode;
+        frontNode = frontNode->next;
+        if (frontNode == nullptr) {
+            rearNode = nullptr;
+        }
+        delete temp;
+    }
+
+    T front() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return T();
+        }
+        return frontNode->data;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return;
+        }
+        Node<T>* current = frontNode;
+        while (current != nullptr) {
+*            cout << current->data << " -> ";
+            current = current->next;
+        }
+        cout << "NULL" << endl;
+    }
+};
+
