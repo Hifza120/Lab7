@@ -1,0 +1,143 @@
+#include "Node.h"
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class LinkedList {
+private:
+    Node<T>* head;
+    Node<T>* tail;
+
+public:
+    LinkedList() : head(nullptr), tail(nullptr) {} // Constructor
+
+    bool isEmpty() {
+        return head == nullptr;
+    }
+
+    // Insert a node at the head of the list
+    void insertAtHead(T data) {
+        Node<T>* newNode = new Node<T>(data);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            newNode->next = head;
+            head = newNode;
+        }
+    }
+
+    // Insert a node at the tail of the list
+    void insertAtTail(T data) {
+        Node<T>* newNode = new Node<T>(data);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    // Insert a node in sorted order
+    void insertSorted(T data) {
+        Node<T>* newNode = new Node<T>(data);
+        if (isEmpty() || head->data >= data) {
+            newNode->next = head;
+            head = newNode;
+        } else {
+            Node<T>* current = head;
+            while (current->next != nullptr && current->next->data < data) {
+                current = current->next;
+            }
+            newNode->next = current->next;
+            current->next = newNode;
+            if (newNode->next == nullptr) {
+                tail = newNode;
+            }
+        }
+    }
+
+    // Delete a node from the head of the list
+    bool deleteFromHead() {
+        if (isEmpty()) {
+            return false;
+        }
+        Node<T>* temp = head;
+        head = head->next;
+        delete temp;
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+        return true;
+    }
+
+    // Delete a node from the tail of the list
+    bool deleteFromTail() {
+        if (isEmpty()) {
+            return false;
+        }
+        if (head == tail) {
+            delete head;
+            head = tail = nullptr;
+            return true;
+        }
+        Node<T>* current = head;
+        while (current->next != tail) {
+            current = current->next;
+        }
+        delete tail;
+        tail = current;
+        tail->next = nullptr;
+        return true;
+    }
+
+    // Delete a specific node by value
+    bool deleteValue(T data) {
+        if (isEmpty()) {
+            return false;
+        }
+        if (head->data == data) {
+            return deleteFromHead();
+        }
+        Node<T>* current = head;
+        while (current->next != nullptr && current->next->data != data) {
+            current = current->next;
+        }
+        if (current->next == nullptr) {
+            return false;
+        }
+        Node<T>* temp = current->next;
+        current->next = current->next->next;
+        if (current->next == nullptr) {
+            tail = current;
+        }
+        delete temp;
+        return true;
+    }
+
+    // Search for a node by value
+    bool search(T data) {
+        Node<T>* current = head;
+        while (current != nullptr) {
+            if (current->data == data) {
+                return true;
+            }
+            current = current->next;
+        }
+        return false;
+    }
+
+    // Display the linked list
+    void display() {
+        if (isEmpty()) {
+            cout << "List is empty!" << endl;
+            return;
+        }
+        Node<T>* current = head;
+        while (current != nullptr) {
+            cout << current->data << " -> ";
+            current = current->next;
+        }
+        cout << "NULL" << endl;
+    }
+};
+
