@@ -1,0 +1,42 @@
+#include”Linkedlist.h”
+template <typename T>
+class Stack {
+private:
+    LinkedList<T> list;  
+
+public:
+    Stack() {}
+
+    void push(T data) {
+        list.insertAtBegin(data);
+    }
+
+    void pop() {
+        if (isEmpty()) {
+            cout << "Stack is empty!\n";
+            return;
+        }
+        list.removeFromBegin();
+    }
+
+    T top() {
+        return list.getFirst();
+    }
+
+    bool isEmpty() {
+        return list.isEmpty();
+    }
+
+    void display() {
+        if (isEmpty()) {
+            cout << "Stack is empty!\n";
+            return;
+        }
+        Node<T>* current = list.head; 
+        while (current != nullptr) {
+            cout << current->data << " -> ";
+            current = current->next;
+        }
+        cout << "NULL" << endl;
+    }
+};
