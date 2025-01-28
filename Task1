@@ -1,0 +1,58 @@
+#include "Linkedlist.h"
+
+
+int main() {
+    LinkedList<int> list;
+    int choice, data;
+
+    while (true) {
+        cout << "Menu:\n";
+        cout << "1. Add node to the linked list\n";
+        cout << "2. Insert node in sorted order\n";
+        cout << "3. Delete a node from the linked list\n";
+        cout << "4. Search for a node in the linked list\n";
+        cout << "5. Display the linked list\n";
+        cout << "6. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter data to insert at head: ";
+                cin >> data;
+                list.insertAtHead(data);
+                break;
+            case 2:
+                cout << "Enter data to insert in sorted order: ";
+                cin >> data;
+                list.insertSorted(data);
+                break;
+            case 3:
+                cout << "Enter data to delete from the linked list: ";
+                cin >> data;
+                if (!list.deleteValue(data)) {
+                    cout << "Value not found!\n";
+                }
+                break;
+            case 4:
+                cout << "Enter data to search in the linked list: ";
+                cin >> data;
+                if (list.search(data)) {
+                    cout << "Node found.\n";
+                } else {
+                    cout << "Node not found.\n";
+                }
+                break;
+            case 5:
+                cout << "Linked List: ";
+                list.display();
+                break;
+            case 6:
+                cout << "Exiting...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+    return 0;
+}
