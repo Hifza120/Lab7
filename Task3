@@ -1,0 +1,49 @@
+#include <iostream>
+#include "Queue.h"
+
+using namespace std;
+
+int main() {
+    Queue<int>q;
+    int choice, value;
+
+    while (true) {
+        cout << "\nMenu:\n";
+        cout << "1. Enqueue (Add value to the queue)\n";
+        cout << "2. Dequeue (Remove value from the queue)\n";
+        cout << "3. Display the queue\n";
+        cout << "4. Check if the queue is empty\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to enqueue: ";
+                cin >> value;
+                q.enqueue(value);
+                break;
+            case 2:
+                q.dequeue();
+                break;
+            case 3:
+                cout << "Queue: ";
+                q.display();
+                break;
+            case 4:
+                if (q.isEmpty()) {
+                    cout << "The queue is empty.\n";
+                } else {
+                    cout << "The queue is not empty.\n";
+                }
+                break;
+            case 5:
+                cout << "Exiting...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+
+    return 0;
+}
